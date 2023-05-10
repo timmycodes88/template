@@ -6,9 +6,9 @@ const createToken = id =>
   jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '3d' })
 
 module.exports.loginUser = async (req, res) => {
-  const { username, email, password } = req.body
+  const { usernameOrEmail, password } = req.body
   try {
-    const user = await User.login(username, email, password)
+    const user = await User.login(usernameOrEmail, password)
 
     const token = createToken(user._id)
 
