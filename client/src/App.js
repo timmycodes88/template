@@ -1,5 +1,9 @@
 import tw from 'twin.macro'
 
+export const AppLoader = async () => {
+  return null
+}
+
 export default function App() {
   return <HelloWorld>Welcome to MERN Template</HelloWorld>
 }
