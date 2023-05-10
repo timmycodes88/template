@@ -4,8 +4,9 @@ const ENDPOINT = process.env.BACKEND_URL + 'http://localhost:5000/api/auth'
 
 /**
  * @typedef {Object} AuthData
- * @property {string} [username] - Optional on Login (must use email)
- * @property {string} [email] - Optional on Login (must use username)
+ * @property {string} [username] - Required on Signup
+ * @property {string} [email]  - Required on Signup
+ * @property {string} [usernameOrEmail] - Required on Login
  * @property {string} password
  *
  * @typedef {Object} User
@@ -24,8 +25,8 @@ const AuthAPI = {
    * @param {AuthData} formData
    * @returns {Promise<AuthResponse> | Promise<Error>}
    */
-  login: async ({ username, email, password }) =>
-    request(ENDPOINT + '/login', { username, email, password }),
+  login: async ({ usernameOrEmail, password }) =>
+    request(ENDPOINT + '/login', { usernameOrEmail, password }),
   /**
    *
    * @param {AuthData} formData

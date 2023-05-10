@@ -22,12 +22,14 @@ const userSchema = new Schema(
   { timestamps: true }
 )
 
-userSchema.statics.login = async function (username, email, password) {
+userSchema.statics.login = async function (usernameOrEmail, password) {
   //* Checks
-  if (!((username || email) && password)) throw new Error('Missing fields')
+  if (!usernameOrEmail || !password) throw new Error('Missing fields')
 
   //* Find and validate user
-  const user = await this.findOne({ $or: [{ email }, { username }] })
+  const user = await this.findOne({
+    $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }],
+  })
   if (!user) {
     if (email) throw new Error('Email does not exist')
     throw new Error('Username does not exist')
