@@ -1,11 +1,10 @@
-export default async function request(url, options) {
+export default async function request(url, body) {
   const modifiedOptions = {
-    ...options,
     headers: {
-      ...options?.headers,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(options?.body),
+    body: JSON.stringify(body),
+    method: body ? 'POST' : 'GET',
   }
 
   const response = await fetch(url, modifiedOptions)
