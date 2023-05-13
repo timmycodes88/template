@@ -10,7 +10,7 @@ module.exports.loginUser = async (req, res) => {
   try {
     const user = await User.login(usernameOrEmail, password)
 
-    const token = createToken(user._id)
+    const token = createToken(user._id.toString())
 
     res.status(200).json({ user, token })
   } catch (error) {
@@ -23,7 +23,7 @@ module.exports.signUpUser = async (req, res) => {
   try {
     const user = await User.signup(username, email, password)
 
-    const token = createToken(user._id)
+    const token = createToken(user._id.toString())
 
     res.status(201).json({ user, token })
   } catch (error) {

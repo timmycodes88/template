@@ -30,15 +30,12 @@ userSchema.statics.login = async function (usernameOrEmail, password) {
   const user = await this.findOne({
     $or: [{ email: usernameOrEmail }, { username: usernameOrEmail }],
   })
-  if (!user) {
-    if (email) throw new Error('Email does not exist')
-    throw new Error('Username does not exist')
-  }
+
+  if (!user) throw new Error('Username or Email does not exist')
 
   //* Check password
   const match = await bcrypt.compare(password, user.password)
   if (!match) throw new Error('Password is incorrect')
-
   return user
 }
 

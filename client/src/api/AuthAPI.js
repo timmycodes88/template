@@ -1,6 +1,6 @@
 import request from '../utils/request'
 
-const ENDPOINT = process.env.BACKEND_URL + 'http://localhost:5000/api/auth'
+const ENDPOINT = 'http://localhost:5000/api/auth'
 
 /**
  * @typedef {Object} AuthData
@@ -14,8 +14,9 @@ const ENDPOINT = process.env.BACKEND_URL + 'http://localhost:5000/api/auth'
  * @property {string} username
  *
  * @typedef {Object} AuthResponse
- * @property {User} user
- * @property {string} token
+ * @property {User} [user] - User object - {_id, username} strings
+ * @property {string} [token] - JWT token
+ * @property {string} [error] - Error message
  *
  */
 

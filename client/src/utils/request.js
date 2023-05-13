@@ -7,7 +7,14 @@ export default async function request(url, body) {
     method: body ? 'POST' : 'GET',
   }
 
-  const response = await fetch(url, modifiedOptions)
+  if (process.env.REACT_APP_IS_DEBUG)
+    console.log('%cRequest', 'color: #00aaff', modifiedOptions)
 
-  return response.json()
+  const response = await fetch(url, modifiedOptions)
+  const data = response.json()
+
+  if (process.env.REACT_APP_IS_DEBUG)
+    console.log('%cResponse', 'color: #114488', data)
+
+  return data
 }
